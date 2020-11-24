@@ -2,9 +2,15 @@ import React from 'react';
 
 import Scores from '../scores/Scores'
 
-const header = () => {
+const header = ( props ) => {
+
+    let {currentScore, gamesWon} = props;
+
     return (
-        <Scores />
+        <div>
+            Current Score: {currentScore}
+            Games Won: {gamesWon}
+        </div>
     )
 }
 
