@@ -13,12 +13,14 @@ const tiles = ( props ) => {
     container
     justifyContent="space-between"
     width="300px"
-  >
-    <Card onClick={() => handleClick(id)} className={styles.cardWrapper}  style={{
+    >
+
+    <Card onClick={() => handleClick(id)} className={styles.cardWrapper} id={id}  style={{
           backgroundImage: `url(${image})` 
-        }}>
-                <Card.Img variant="top"   />
-            </Card>
+    }}>
+      <Card.Img variant="top"   />
+    </Card>
+
   </Flex>
 
    )
