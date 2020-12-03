@@ -1,16 +1,18 @@
 import React from 'react';
-
-import Scores from '../scores/Scores'
+import styles from './Header.module.css';
+import Flexbox from 'flexbox-react';
 
 const header = ( props ) => {
 
-    let {currentScore, gamesWon} = props;
+    let {currentScore, gamesWon, message} = props;
 
     return (
-        <div>
-            Current Score: {currentScore}
-            Games Won: {gamesWon}
-        </div>
+        <Flexbox className={styles.scores}>
+            <h2>Current Score: {currentScore}</h2>
+            <h2>Games Won: {gamesWon}</h2>
+            <h2>{message}</h2>
+
+        </Flexbox>
     )
 }
 

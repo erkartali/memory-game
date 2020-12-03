@@ -1,18 +1,26 @@
 import React from 'react';
 import styles from './Tiles.module.css';
 import { Card } from 'react-bootstrap';
+import { Flex } from '../flex/Flex'
 
 const tiles = ( props ) => {
 
-    let {name, image, handleClick, id} = props;
+    let {image, handleClick, id} = props;
 
    return (
-       <div className={styles.otherWrapper} >
-            <Card onClick={() => handleClick(id)} className={styles.cardWrapper}>
-                <Card.Img variant="top" src={image, {id}}  />
-   <Card.Body>{id}</Card.Body>
+       
+    <Flex
+    container
+    justifyContent="space-between"
+    width="300px"
+  >
+    <Card onClick={() => handleClick(id)} className={styles.cardWrapper}  style={{
+          backgroundImage: `url(${image})` 
+        }}>
+                <Card.Img variant="top"   />
             </Card>
-       </div>
+  </Flex>
+
    )
     
    

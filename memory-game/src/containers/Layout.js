@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Container } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 
 import Header from '../components/header/Header';
 import Tiles from '../components/tiles/Tiles';
@@ -24,7 +24,8 @@ class Layout extends Component {
         gamesWon: 0,
         characters,
         guessedArray: [],
-
+        setShow: false,
+        message: '',
     }
     
     // calls shuffle function on json data
@@ -34,9 +35,9 @@ class Layout extends Component {
 
     //function to reset scores 
     reset = () => {
-        this.setState({currentScore: 0})
-        this.setState({guessedArray: []})
+        this.setState({currentScore: 0, guessedArray: []})
     }
+
 
     // main function that does all of the stuff when a card is clicked
     handleClick = (id) => {
@@ -44,7 +45,10 @@ class Layout extends Component {
         let guessedArray = this.state.guessedArray;
         let gamesWon = this.state.gamesWon;
         let currentScore = this.state.currentScore;
-        let characters = this.state.characters
+        const win = 'You guessed them all right!';
+        const lose = 'Try again!';
+
+        this.setState({message: ''})
 
         if (guessedArray.indexOf(id) === -1) {
             //push the id of the clicked card into the guessedArray
@@ -59,16 +63,20 @@ class Layout extends Component {
             this.makeShuffle();
 
             if (this.state.currentScore === 11) {
-                alert('Good work champ!')
                 
                 // add one to games won value
                 this.setState({gamesWon: gamesWon+1})
+
+                //set value of message
+                this.setState({message: win})
 
                 // reset values
                 this.reset()
             }
             } else {
-                alert("you guessed that one already!");
+
+                //set value of message
+                this.setState({message: lose})
 
                 //reset values
                 this.reset();
@@ -79,7 +87,6 @@ class Layout extends Component {
         // card that is rendered for each character in the array
         const tileList = this.state.characters.map( (character) => 
             <Tiles 
-                name={character.name}
                 key={character.id}
                 id={character.id}
                 image={character.image}
@@ -88,17 +95,24 @@ class Layout extends Component {
         )
 
         return (
-            <div>
+            <div className={styles.gameWrapper}>
+                <div className={styles.wrapper}>
+                <h1 className='title'>Memory Game</h1>
+
                 <Header 
                 gamesWon={this.state.gamesWon}
                 currentScore={this.state.currentScore}
+                message={this.state.message}
                 />
+                </div>
 
-                <Container fluid="md" className={styles.tileWrapper}>
+                <Row className={styles.rowStyles}>
 
-                    {tileList}
-                    
-                </Container>
+                {tileList}
+
+
+                </Row>
+               
             </div>
         )
     }
